@@ -1,0 +1,78 @@
+Описать класс "Телефонный звонок"
+-номер телефона
+-дата разговора
+-продолжительность
+
+Создать список объектов класса
+
+Вывести в таблицу 
+
+Добавить данные
+
+Примерный код
+<DataGrid AutoGenerateColumns="False"
+                    x:Name="DtgListPhone"
+                    Width="400"
+                         Height="300"
+                    Margin="10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Header="Название модели"
+                            Binding="{Binding Title}"/>
+                    
+                        <DataGridTextColumn
+                            Header="Компания-производитель"
+                            Binding="{Binding Company}"/>
+                    
+                        <DataGridTextColumn
+                            Header="Цена"
+                            Binding="{Binding Price}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+<TextBlock Text="Название телефона"/>
+            <TextBox Name="TxtPhone"/>
+            <Button Name="BtnArray"
+                Content="Вывести список"
+                Click="BtnArray_Click"
+                Width="100"
+                Height="30"/>
+            <Button Name="BtnAdd"
+                Content="Добавить"
+                Click="BtnAdd_Click"
+                Width="100"
+                Height="30"/>
+
+
+
+public partial class MainWindow : Window
+    {
+        List<Phone> phonesList = new List<Phone>
+                {
+                    new Phone {Title="iPhone 6S", Company="Apple", Price=54990 },
+                    new Phone {Title="Lumia 950", Company="Microsoft", Price=39990 },
+                    new Phone {Title="Nexus 5X", Company="Google", Price=29990 }
+                };
+        public MainWindow()
+        {
+            InitializeComponent();
+         
+        }
+
+        private void BtnArray_Click(object sender, RoutedEventArgs e)
+        {
+           
+           
+            DtgListPhone.ItemsSource = phonesList;
+          
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Phone addPhone = new Phone { Title = TxtPhone.Text, 
+			Company = "Sony", Price = 10000 };
+            phonesList.Add(addPhone);
+            DtgListPhone.ItemsSource = null;
+            DtgListPhone.ItemsSource = phonesList;
+        }
+    }
